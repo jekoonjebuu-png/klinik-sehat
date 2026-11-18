@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Dashboard Admin | LabCare</title>
 
     <style>
@@ -22,7 +20,6 @@
         }
 
         /* SIDEBAR */
-
         .sidebar {
             width: 240px;
             height: 100vh;
@@ -52,7 +49,6 @@
         }
 
         /* MAIN CONTENT */
-
         .main-content {
             margin-left: 240px;
             padding: 30px;
@@ -80,7 +76,6 @@
         }
 
         /* STATISTICS */
-
         .stats-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -106,7 +101,6 @@
         }
 
         /* TABLE */
-
         .table-container {
             background: white;
             padding: 25px;
@@ -134,7 +128,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 750px;
+            min-width: 850px;
         }
 
         th, td {
@@ -155,6 +149,26 @@
             border-radius: 5px;
         }
 
+        .action-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .result-button {
+            background: #e0f7f4;
+            color: #078d80;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .result-button:hover {
+            background: #16b8a6;
+            color: white;
+        }
+
         .delete-button {
             background: #fff0ed;
             color: #d93025;
@@ -164,113 +178,176 @@
             cursor: pointer;
         }
 
+        .badge-hasil {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge-ada {
+            background: #d9f7f2;
+            color: #078d80;
+        }
+
+        .badge-belum {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
         .empty-message {
             text-align: center;
             padding: 30px;
             color: #888;
         }
 
-        /* RESPONSIVE */
+        /* MODAL INPUT HASIL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 1000;
+        }
 
+        .modal-overlay[hidden] {
+            display: none !important;
+        }
+
+        .modal-box {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 14px;
+            position: relative;
+        }
+
+        .modal-box h2 {
+            color: #123b55;
+            margin-bottom: 5px;
+        }
+
+        .modal-box p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .modal-box label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .modal-box input,
+        .modal-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-cancel {
+            background: #e2e8f0;
+            color: #334155;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: #087eaa;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 800px) {
             .sidebar {
                 width: 100%;
                 height: auto;
                 position: relative;
             }
-
             .sidebar h2 {
                 margin-bottom: 15px;
             }
-
             .main-content {
                 margin-left: 0;
                 padding: 18px;
             }
-
             .stats-container {
                 grid-template-columns: 1fr;
             }
-
             .topbar {
                 align-items: flex-start;
             }
         }
     </style>
-
 </head>
 
 <body>
 
     <!-- SIDEBAR -->
-
     <aside class="sidebar">
-
         <h2>✚ LabCare.</h2>
-
         <a href="#" class="active">Dashboard</a>
         <a href="#data-booking">Data Booking</a>
         <a href="index.html">Halaman Utama</a>
-
     </aside>
 
-
     <!-- MAIN CONTENT -->
-
     <main class="main-content">
 
         <header class="topbar">
-
             <div>
                 <h1>Dashboard Admin</h1>
                 <p>Selamat datang di panel administrator LabCare.</p>
             </div>
-
-            <button class="logout-button" onclick="logout()">
-                Logout
-            </button>
-
+            <button class="logout-button" onclick="logout()">Logout</button>
         </header>
 
-
         <!-- STATISTIK -->
-
         <section class="stats-container">
-
             <div class="stat-card">
                 <p>Total Booking</p>
                 <h2 id="totalBooking">0</h2>
             </div>
-
             <div class="stat-card">
                 <p>Menunggu Konfirmasi</p>
                 <h2 id="menungguBooking">0</h2>
             </div>
-
             <div class="stat-card">
                 <p>Booking Selesai</p>
                 <h2 id="selesaiBooking">0</h2>
             </div>
-
         </section>
 
-
         <!-- TABEL BOOKING -->
-
         <section class="table-container" id="data-booking">
-
             <div class="table-header">
-
                 <h2>Data Booking Pasien</h2>
-
-                <button onclick="hapusSemuaBooking()">
-                    Hapus Semua Data
-                </button>
-
+                <button onclick="hapusSemuaBooking()">Hapus Semua Data</button>
             </div>
 
             <table>
-
                 <thead>
                     <tr>
                         <th>No</th>
@@ -279,61 +356,62 @@
                         <th>Layanan</th>
                         <th>Tanggal</th>
                         <th>Status</th>
+                        <th>Hasil Lab</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
-
-                <tbody id="bookingTable">
-
-                </tbody>
-
+                <tbody id="bookingTable"></tbody>
             </table>
 
-            <p id="emptyMessage" class="empty-message">
-                Belum ada data booking.
-            </p>
-
+            <p id="emptyMessage" class="empty-message">Belum ada data booking.</p>
         </section>
 
     </main>
 
+    <!-- MODAL INPUT HASIL PEMERIKSAAN -->
+    <div id="hasilModal" class="modal-overlay" hidden>
+        <div class="modal-box">
+            <h2>Input Hasil Pemeriksaan</h2>
+            <p id="infoPasienModal">Pasien: -</p>
+
+            <form id="hasilForm">
+                <input type="hidden" id="editIndex">
+
+                <label for="nilaiHasil">Hasil Pemeriksaan (Contoh: Kolesterol 185 mg/dL - Normal)</label>
+                <input type="text" id="nilaiHasil" placeholder="Masukkan hasil pemeriksaan..." required>
+
+                <label for="catatanDokter">Catatan / Rekomendasi Lab</label>
+                <textarea id="catatanDokter" rows="3" placeholder="Contoh: Kadar dalam batas normal, tetap jaga pola makan."></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="tutupModalHasil()">Batal</button>
+                    <button type="submit" class="btn-save">Simpan Hasil</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT -->
-
     <script>
-
         // Memeriksa login admin
         if (sessionStorage.getItem("adminLogin") !== "true") {
             window.location.replace("login.html");
         }
 
-        // Mengambil data booking
-        let daftarBooking = JSON.parse(
-            localStorage.getItem("daftarBooking")
-        ) || [];
+        let daftarBooking = JSON.parse(localStorage.getItem("daftarBooking")) || [];
 
-        // Menampilkan data booking
         function tampilkanBooking() {
-
             const tabel = document.getElementById("bookingTable");
             const pesanKosong = document.getElementById("emptyMessage");
 
             tabel.innerHTML = "";
-
             let menunggu = 0;
             let selesai = 0;
 
             daftarBooking.forEach((booking, index) => {
-
                 const status = booking.status || "Menunggu Konfirmasi";
-
-                if (status === "Menunggu Konfirmasi") {
-                    menunggu++;
-                }
-
-                if (status === "Selesai") {
-                    selesai++;
-                }
+                if (status === "Menunggu Konfirmasi") menunggu++;
+                if (status === "Selesai") selesai++;
 
                 const baris = document.createElement("tr");
 
@@ -342,12 +420,10 @@
                     booking.nama || "-",
                     booking.telepon || "-",
                     booking.layanan || "-",
-                    booking.tanggal || "-",
-                    null,
-                    null
+                    booking.tanggal || "-"
                 ];
 
-                data.slice(0, 5).forEach(nilai => {
+                data.forEach(nilai => {
                     const kolom = document.createElement("td");
                     kolom.textContent = nilai;
                     baris.appendChild(kolom);
@@ -357,127 +433,126 @@
                 const kolomStatus = document.createElement("td");
                 const pilihanStatus = document.createElement("select");
 
-                ["Menunggu Konfirmasi", "Diproses", "Selesai"]
-                    .forEach(item => {
-
-                        const opsi = document.createElement("option");
-                        opsi.value = item;
-                        opsi.textContent = item;
-
-                        if (status === item) {
-                            opsi.selected = true;
-                        }
-
-                        pilihanStatus.appendChild(opsi);
-                    });
+                ["Menunggu Konfirmasi", "Diproses", "Selesai"].forEach(item => {
+                    const opsi = document.createElement("option");
+                    opsi.value = item;
+                    opsi.textContent = item;
+                    if (status === item) opsi.selected = true;
+                    pilihanStatus.appendChild(opsi);
+                });
 
                 pilihanStatus.addEventListener("change", function() {
                     daftarBooking[index].status = this.value;
-
-                    localStorage.setItem(
-                        "daftarBooking",
-                        JSON.stringify(daftarBooking)
-                    );
-
+                    localStorage.setItem("daftarBooking", JSON.stringify(daftarBooking));
                     tampilkanBooking();
                 });
 
                 kolomStatus.appendChild(pilihanStatus);
                 baris.appendChild(kolomStatus);
 
-                // Kolom hapus
-                const kolomAksi = document.createElement("td");
-                const tombolHapus = document.createElement("button");
+                // Kolom Indikator Hasil Lab
+                const kolomHasil = document.createElement("td");
+                const badge = document.createElement("span");
+                if (booking.hasilLab) {
+                    badge.className = "badge-hasil badge-ada";
+                    badge.textContent = "Tersedia";
+                } else {
+                    badge.className = "badge-hasil badge-belum";
+                    badge.textContent = "Belum Diinput";
+                }
+                kolomHasil.appendChild(badge);
+                baris.appendChild(kolomHasil);
 
+                // Kolom Aksi
+                const kolomAksi = document.createElement("td");
+                const grupAksi = document.createElement("div");
+                grupAksi.className = "action-group";
+
+                const tombolHasil = document.createElement("button");
+                tombolHasil.textContent = booking.hasilLab ? "Edit Hasil" : "Input Hasil";
+                tombolHasil.className = "result-button";
+                tombolHasil.addEventListener("click", function() {
+                    bukaModalHasil(index);
+                });
+
+                const tombolHapus = document.createElement("button");
                 tombolHapus.textContent = "Hapus";
                 tombolHapus.className = "delete-button";
-
                 tombolHapus.addEventListener("click", function() {
                     hapusBooking(index);
                 });
 
-                kolomAksi.appendChild(tombolHapus);
+                grupAksi.appendChild(tombolHasil);
+                grupAksi.appendChild(tombolHapus);
+                kolomAksi.appendChild(grupAksi);
                 baris.appendChild(kolomAksi);
 
                 tabel.appendChild(baris);
-
             });
 
-            document.getElementById("totalBooking").textContent =
-                daftarBooking.length;
-
-            document.getElementById("menungguBooking").textContent =
-                menunggu;
-
-            document.getElementById("selesaiBooking").textContent =
-                selesai;
-
-            pesanKosong.style.display =
-                daftarBooking.length === 0 ? "block" : "none";
-
+            document.getElementById("totalBooking").textContent = daftarBooking.length;
+            document.getElementById("menungguBooking").textContent = menunggu;
+            document.getElementById("selesaiBooking").textContent = selesai;
+            pesanKosong.style.display = daftarBooking.length === 0 ? "block" : "none";
         }
 
+        // Buka Modal Input Hasil
+        function bukaModalHasil(index) {
+            const booking = daftarBooking[index];
+            document.getElementById("editIndex").value = index;
+            document.getElementById("infoPasienModal").textContent =
+                `Pasien: ${booking.nama} (${booking.layanan})`;
+            document.getElementById("nilaiHasil").value = booking.hasilLab || "";
+            document.getElementById("catatanDokter").value = booking.catatanLab || "";
+            document.getElementById("hasilModal").hidden = false;
+        }
 
-        // Menghapus satu booking
+        function tutupModalHasil() {
+            document.getElementById("hasilModal").hidden = true;
+        }
+
+        // Simpan Hasil Pemeriksaan
+        document.getElementById("hasilForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const index = document.getElementById("editIndex").value;
+            daftarBooking[index].hasilLab = document.getElementById("nilaiHasil").value;
+            daftarBooking[index].catatanLab = document.getElementById("catatanDokter").value;
+            daftarBooking[index].status = "Selesai"; // Otomatis ubah status jadi Selesai
+
+            localStorage.setItem("daftarBooking", JSON.stringify(daftarBooking));
+            tutupModalHasil();
+            tampilkanBooking();
+            alert("Hasil pemeriksaan berhasil disimpan!");
+        });
+
         function hapusBooking(index) {
-
             if (confirm("Apakah kamu yakin ingin menghapus booking ini?")) {
-
                 daftarBooking.splice(index, 1);
-
-                localStorage.setItem(
-                    "daftarBooking",
-                    JSON.stringify(daftarBooking)
-                );
-
+                localStorage.setItem("daftarBooking", JSON.stringify(daftarBooking));
                 tampilkanBooking();
-
             }
-
         }
 
-
-        // Menghapus semua booking
         function hapusSemuaBooking() {
-
             if (daftarBooking.length === 0) {
                 alert("Belum ada data booking.");
                 return;
             }
-
             if (confirm("Yakin ingin menghapus semua data booking?")) {
-
                 daftarBooking = [];
-
-                localStorage.setItem(
-                    "daftarBooking",
-                    JSON.stringify(daftarBooking)
-                );
-
+                localStorage.setItem("daftarBooking", JSON.stringify(daftarBooking));
                 tampilkanBooking();
-
             }
-
         }
 
-
-        // Logout admin
         function logout() {
-
             if (confirm("Apakah kamu yakin ingin logout?")) {
-
                 sessionStorage.removeItem("adminLogin");
-
                 window.location.href = "login.html";
-
             }
-
         }
 
-
-        // Menjalankan dashboard
         tampilkanBooking();
-
     </script>
 
 </body>
