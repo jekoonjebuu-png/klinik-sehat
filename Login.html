@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Admin | LabCare</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e8f4ff, #d5e9f5);
+        }
+
+        .login-container {
+            width: 90%;
+            max-width: 420px;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo h1 {
+            color: #087eaa;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .login-logo p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .login-container h2 {
+            color: #173b50;
+            margin-bottom: 8px;
+            font-size: 23px;
+        }
+
+        .login-description {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .login-group {
+            margin-bottom: 20px;
+        }
+
+        .login-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .login-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .login-group input:focus {
+            border-color: #087eaa;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: #087eaa;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background: #066587;
+        }
+
+        .login-message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #d93025;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #087eaa;
+            font-size: 14px;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-logo">
+            <h1>✚ LabCare.</h1>
+            <p>Laboratory Services</p>
+        </div>
+
+        <h2>Login Admin</h2>
+
+        <p class="login-description">
+            Silakan masuk untuk mengelola data pemesanan.
+        </p>
+
+        <form id="loginForm">
+
+            <div class="login-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Masukkan username"
+                    required>
+            </div>
+
+            <div class="login-group">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Masukkan password"
+                    required>
+            </div>
+
+            <button type="submit" class="login-button">
+                Masuk Sekarang
+            </button>
+
+            <p id="loginMessage" class="login-message"></p>
+
+        </form>
+
+        <a href="index.html" class="back-home">
+            ← Kembali ke Beranda
+        </a>
+
+        <div class="login-footer">
+            © 2026 LabCare. All Rights Reserved.
+        </div>
+
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+
+        loginForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const message = document.getElementById("loginMessage");
+
+            // Akun admin untuk demonstrasi proyek
+            if (username === "admin" && password === "labcare123") {
+
+                sessionStorage.setItem("adminLogin", "true");
+
+                window.location.href = "dashboard.html";
+
+            } else {
+
+                message.textContent = "Username atau password salah!";
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>
